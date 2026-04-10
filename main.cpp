@@ -1,37 +1,47 @@
 #include <iostream>
-using namespace std;
+#include <string>
 
 class Paciente {
-    private:
-    string nombre;
-    string apellidos;
-    public:
-     void setPaciente (string nombre, string apellido){
+private:
+    std::string nombre;
+    std::string apellidos;
+
+public:
+    void setPaciente(const std::string& nombre, const std::string& apellidos) {
         this->nombre = nombre;
         this->apellidos = apellidos;
-     }
-     string getNombreCompleto (){
-        return this->nombre + " " +this->apellidos;
-     }
+    }
+
+    std::string getNombreCompleto() const {
+        return this->nombre + " " + this->apellidos;
+    }
 };
-int main(){
-    string nombre;
-    string apellidos;
-    Paciente paciente;
-    Paciente pacientes[3] = {};
+
+int main() {
+    std::string nombre;
+    std::string apellidos;
+
+    Paciente pacientes[3];
+
     for (int i = 0; i < 3; i++) {
-        cout << "Paciente nº "<< i + 1 << "\n";
-        cout << "Introducir nombre" << "\n";
-        getline(cin, nombre);
-        cout << "Introducir apellidos" << "\n";
-        getline(cin, apellidos);
-        paciente.setPaciente(nombre, apellidos);
-        pacientes[i] = paciente;
+        std::cout << "Paciente nº " << i + 1 << "\n";
+
+        std::cout << "Introducir nombre: ";
+        std::getline(std::cin, nombre);
+
+        std::cout << "Introducir apellidos: ";
+        std::getline(std::cin, apellidos);
+
+        pacientes[i].setPaciente(nombre, apellidos);
     }
-    cout << "Listado de Pacientes" << "\n";
-    for (int i = 0; i < 3; i++){
-        cout << i+1 << ".- " << pacientes[i].getNombreCompleto() << "\n";
+
+    std::cout << "\nListado de Pacientes:\n";
+
+    for (int i = 0; i < 3; i++) {
+        std::cout << i + 1 << ".- "
+                  << pacientes[i].getNombreCompleto()
+                  << "\n";
     }
-    cin.get();
+
     return 0;
 }
